@@ -7,7 +7,11 @@ const server = Express();
 server.use(Express.json());
 
 server.post('/teams', (req, res) => {
-  res.end();
+  const team = req.body;
+  Teams.addTeam(team)
+    .then((newTeam) => {
+      res.status(201).json(newTeam);
+    });
 });
 
 server.delete('/teams', (req, res) => {
