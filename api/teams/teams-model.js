@@ -13,8 +13,10 @@ async function addTeam(newTeam) {
 
   return getTeamById(team_id);
 }
-function removeTeam() {
-  return null;
+async function removeTeam(team_id) {
+  const oldResource = await getTeamById(team_id);
+  await db('teams').where({ team_id }).del();
+  return oldResource;
 }
 
 module.exports = {

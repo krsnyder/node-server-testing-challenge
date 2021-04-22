@@ -67,9 +67,18 @@ describe('Team model', () => {
     });
   });
 
-  // describe('  removeTeam', () => {
-  //   it.todo('Todo test', () => {
-
-  //   });
-  // });
+  describe('removeTeam', () => {
+    it('makes a change to the db', async () => {
+      await Teams.removeTeam(3);
+      expect(await db('teams')).toHaveLength(2);
+    });
+    it('removes the correct record', async () => {
+      const deletedTeam = await Teams.removeTeam(2);
+      expect(deletedTeam).toMatchObject({
+        team_id: 2,
+        team_name: "Dabo's Dynasty",
+        team_manager: 'Greg Daly',
+      });
+    });
+  });
 });
