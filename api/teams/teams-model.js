@@ -3,8 +3,9 @@ const db = require('../../data/db-config');
 function getTeams() {
   return db('teams');
 }
-function getTeamById() {
-  return null;
+function getTeamById(team_id) {
+  return db('teams')
+    .where({ team_id }).first();
 }
 function addTeam() {
   return null;

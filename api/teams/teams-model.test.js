@@ -41,20 +41,26 @@ describe('Team model', () => {
   });
 
   describe('getTeamById', () => {
-    it('can retrieve a team by the id', () => {
-
+    it('can retrieve a team by the id', async () => {
+      const team = await Teams.getTeamById(2);
+      console.log(team);
+      expect(team).toMatchObject({
+        team_id: 2,
+        team_name: "Dabo's Dynasty",
+        team_manager: 'Greg Daly',
+      });
     });
   });
 
-  describe('  addTeam', () => {
-    it.todo('Todo test', () => {
+  // describe('  addTeam', () => {
+  //   it.todo('Todo test', () => {
 
-    });
-  });
+  //   });
+  // });
 
-  describe('  removeTeam', () => {
-    it.todo('Todo test', () => {
+  // describe('  removeTeam', () => {
+  //   it.todo('Todo test', () => {
 
-    });
-  });
+  //   });
+  // });
 });
