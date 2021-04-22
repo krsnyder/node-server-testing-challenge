@@ -1,11 +1,3 @@
-// declare instance of express
-// create server and invoke Express
-// Import any middleware
-// Teach express to parse JSON
-// Build error handling
-// Make calls to routers
-// Export module
-
 const Express = require('express');
 
 const Teams = require('./teams/teams-model');
@@ -13,8 +5,6 @@ const Teams = require('./teams/teams-model');
 const server = Express();
 
 server.use(Express.json());
-
-// Place all requests
 
 server.get('/teams', (req, res) => {
   res.end();
