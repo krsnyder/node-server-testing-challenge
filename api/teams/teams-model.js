@@ -7,8 +7,11 @@ function getTeamById(team_id) {
   return db('teams')
     .where({ team_id }).first();
 }
-function addTeam() {
-  return null;
+async function addTeam(newTeam) {
+  const [team_id] = await db('teams')
+    .insert(newTeam);
+
+  return getTeamById(team_id);
 }
 function removeTeam() {
   return null;

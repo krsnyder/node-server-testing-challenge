@@ -23,7 +23,7 @@ describe('Team model', () => {
     beforeEach(async () => {
       teams = await Teams.getTeams();
     });
-    it('can retrieve all teams', async () => {
+    it('can retrieve all teams', () => {
       expect(teams).toHaveLength(3);
     });
     it('retrieves teams in the correct shape', () => {
@@ -43,7 +43,6 @@ describe('Team model', () => {
   describe('getTeamById', () => {
     it('can retrieve a team by the id', async () => {
       const team = await Teams.getTeamById(2);
-      console.log(team);
       expect(team).toMatchObject({
         team_id: 2,
         team_name: "Dabo's Dynasty",
@@ -52,11 +51,21 @@ describe('Team model', () => {
     });
   });
 
-  // describe('  addTeam', () => {
-  //   it.todo('Todo test', () => {
+  describe('addTeam', () => {
+    const newTeam = {
+      team_name: "Rico's Roughnecks",
+      team_manager: 'Jay',
+    };
 
-  //   });
-  // });
+    it('makes a change to the db', async () => {
+      await Teams.addTeam(newTeam);
+      expect(await Teams.getTeams()).toHaveLength(4);
+    });
+    it('returns the new team', async () => {
+      const result = await Teams.addTeam(newTeam);
+      expect(result).toMatchObject(newTeam);
+    });
+  });
 
   // describe('  removeTeam', () => {
   //   it.todo('Todo test', () => {
