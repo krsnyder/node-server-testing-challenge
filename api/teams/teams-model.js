@@ -1,7 +1,7 @@
 const db = require('../../data/db-config');
 
 function getTeams() {
-  return null;
+  return db('teams');
 }
 function getTeamById() {
   return null;
