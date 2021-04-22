@@ -6,14 +6,6 @@ const server = Express();
 
 server.use(Express.json());
 
-server.get('/teams', (req, res) => {
-  res.end();
-});
-
-server.get('/teams/:id', (req, res) => {
-  res.end();
-});
-
 server.post('/teams', (req, res) => {
   res.end();
 });
