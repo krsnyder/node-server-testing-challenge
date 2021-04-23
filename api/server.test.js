@@ -1,6 +1,7 @@
 const request = require('supertest');
 const server = require('./server');
 const db = require('../data/db-config');
+const { getTeams } = require('./teams/teams-model');
 
 beforeAll(async () => {
   await db.migrate.rollback();
@@ -43,12 +44,20 @@ describe('Teams Endpoints', () => {
       });
     });
   });
+
   describe('[DELETE] request', () => {
-    it('removes a record from the db', () => {
-
+    it('removes a record from the db', async () => {
+      await request(server).delete('/teams/2');
+      expect(await db('teams')).toHaveLength(2);
     });
-    it('responds with the deleted record', () => {
-
+    it('responds with the deleted record', async () => {
+      const removedTeam = await request(server).delete('/teams/1');
+      console.log(removedTeam);
+      expect(removedTeam).toMatchObject({
+        team_id: 1,
+        team_name: 'Built for the Future',
+        team_manager: 'Kirk Snyder',
+      });
     });
   });
 });

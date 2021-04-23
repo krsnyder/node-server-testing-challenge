@@ -14,8 +14,14 @@ server.post('/teams', (req, res) => {
     });
 });
 
-server.delete('/teams', (req, res) => {
-  res.end();
+server.delete('/teams/:team_id', (req, res, next) => {
+  const { team_id } = req.params;
+  Teams.removeTeam(team_id)
+    .then((removedTeam) => {
+      // console.log(removedTeam);
+      res.status(200).json(removedTeam);
+    })
+    .catch(next);
 });
 
 // eslint-disable-next-line no-unused-vars
